@@ -1,0 +1,18 @@
+{
+	"$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+	"app": {
+		"windows": [
+			{
+				"title": "Vylite",
+				"width": 1240,
+				"height": 820,
+				"center": true,
+				"resizable": true,
+				"fullscreen": false,
+				"decorations": true,
+				"titleBarStyle": "Overlay",
+				"hiddenTitle": true
+			}
+		]
+	}
+}

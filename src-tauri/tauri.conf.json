@@ -1,0 +1,56 @@
+{
+	"$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+	"productName": "Vylite",
+	"version": "0.1.0",
+	"identifier": "app.vylite",
+	"build": {
+		"frontendDist": "../build",
+		"devUrl": "http://localhost:5173",
+		"beforeDevCommand": "pnpm dev",
+		"beforeBuildCommand": "pnpm build"
+	},
+	"app": {
+		"windows": [
+			{
+				"title": "Vylite",
+				"width": 1240,
+				"height": 820,
+				"center": true,
+				"resizable": true,
+				"fullscreen": false,
+				"decorations": false
+			}
+		],
+		"security": {
+			"csp": null
+		}
+	},
+	"bundle": {
+		"active": true,
+		"targets": "all",
+		"createUpdaterArtifacts": true,
+		"publisher": "Vylite",
+		"copyright": "Copyright © 2026 the Vylite contributors",
+		"category": "Productivity",
+		"homepage": "https://vylite.app",
+		"shortDescription": "A command-based notes app.",
+		"longDescription": "Vylite is a command-based notes app.",
+		"icon": [
+			"icons/32x32.png",
+			"icons/128x128.png",
+			"icons/128x128@2x.png",
+			"icons/icon.icns",
+			"icons/icon.ico"
+		],
+		"android": {
+			"debugApplicationIdSuffix": ".debug"
+		}
+	},
+	"plugins": {
+		"updater": {
+			"pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDUyQjEzOTdCNjBERjIxOEQKUldTTklkOWdlem14VXI4Y1Z2ZFZnSTMvWGNNZHdLVEFTSlZyWXNjcnQvbHRham9EQi9Zb0pJdkMK",
+			"endpoints": ["https://github.com/Vylite/vylite/releases/latest/download/latest.json"],
+			"requireSignedVersion": true
+		}
+	}
+}
