@@ -1,0 +1,10 @@
+.render-failed {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-sm);
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	padding: var(--space-lg);
+	color: var(--color-error);
+}

@@ -1,14 +1,25 @@
+import { on } from 'svelte/events';
 import type { App } from '$lib/core/app';
 import { catchError } from '$lib/core/errors/catch-error';
 
 export const initState = $state({ ready: false });
 
 export function init(app: App): () => void {
-	const stopListening = app.ui.keys.listen();
+	const stopErrors = on(window, 'error', (event) =>
+		app.errors.report(event.error ?? event.message)
+	);
+	const stopRejections = on(window, 'unhandledrejection', (event) =>
+		app.errors.report(event.reason)
+	);
+	const stopKeys = app.ui.keys.listen();
 
 	void start(app);
 
-	return () => stopListening();
+	return () => {
+		stopErrors();
+		stopRejections();
+		stopKeys();
+	};
 }
 
 async function start(app: App): Promise<void> {

@@ -1,0 +1,43 @@
+.titlebar-drag {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 20px;
+	z-index: 100;
+}
+
+.titlebar-controls {
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 101;
+	display: flex;
+	height: 32px;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.titlebar-control {
+	display: grid;
+	place-items: center;
+	width: 46px;
+	height: 100%;
+	padding: 0;
+	font: inherit;
+	font-family: 'JetBrainsMono NFM';
+	color: var(--color-text-muted);
+	background: var(--color-surface-secondary);
+	border: none;
+	cursor: pointer;
+
+	&:hover {
+		color: var(--color-text);
+		background: color-mix(in srgb, var(--color-surface-secondary) 78%, var(--color-border));
+	}
+
+	&.titlebar-close {
+		color: var(--color-surface);
+		background: var(--color-error);
+	}
+}

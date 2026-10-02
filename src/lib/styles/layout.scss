@@ -1,0 +1,85 @@
+.app {
+	--workspace-top: 16.5vh;
+	--workspace-bottom: clamp(var(--space-xs), calc(20vh - 120px), 5vh);
+
+	position: relative;
+	display: flex;
+	width: 100%;
+	height: 100%;
+}
+
+.app[data-layout='tall'] {
+	--workspace-top: 0;
+	--workspace-bottom: 0;
+}
+
+.app[data-layout='full'] {
+	--content-width: min(90vw, 1100px);
+	--workspace-top: 2vh;
+	--workspace-bottom: 0;
+}
+
+.app-workspace {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-sm);
+	height: 100%;
+	padding-top: var(--workspace-top);
+	padding-bottom: var(--workspace-bottom);
+}
+
+.app-hub {
+	width: min(var(--content-width), 100%);
+}
+
+.slot {
+	position: relative;
+	overflow: hidden;
+	isolation: isolate;
+	background: var(--color-surface);
+	border: var(--border-width) solid var(--color-border);
+	border-radius: var(--border-radius);
+
+	&:not(:has(> :not([hidden]) > *)) {
+		display: none;
+	}
+}
+
+.slot-root {
+	height: var(--root-height);
+}
+
+.slot-twig {
+	background: var(--color-surface-secondary);
+	border-top: none;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.app-hub:has(> .slot-twig > :not([hidden]) > *) > .slot-root {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.slot-nest {
+	flex: 1;
+	width: min(var(--content-width), 100%);
+	min-height: 0;
+}
+
+.app[data-layout='tall'] .slot-nest {
+	border-bottom: none;
+}
+
+.slot-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 25;
+	pointer-events: none;
+
+	> .slot-content > * {
+		pointer-events: auto;
+	}
+}

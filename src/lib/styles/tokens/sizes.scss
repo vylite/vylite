@@ -1,0 +1,30 @@
+:root {
+	/* font */
+	--font-mono:
+		'JetBrains Mono', 'JetBrainsMono NFM', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	--font-weight-regular: 400;
+	--font-weight-bold: 700;
+	--font-weight-extrabold: 800;
+
+	/* type scale */
+	--font-size-sm: 0.875rem;
+	--font-size-md: 1rem;
+	--line-height: 1.5;
+
+	/* spacing */
+	--space-xs: 0.4375rem;
+	--space-sm: 0.6875rem;
+	--space-md: 0.95rem;
+	--space-lg: 1.5rem;
+	--space-xl: 2rem;
+
+	/* borders */
+	--border-width: 1px;
+	--border-radius: 0px;
+
+	/* widths */
+	--content-width: 930px;
+
+	/* heights */
+	--root-height: 52px;
+}

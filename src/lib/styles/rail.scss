@@ -1,0 +1,29 @@
+.slot-rail {
+	position: absolute;
+	right: 0;
+	bottom: var(--space-md);
+	z-index: 10;
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-xs);
+	width: max(12rem, calc((100% - var(--content-width)) / 2 - var(--space-md)));
+	font-size: var(--font-size-sm);
+	color: var(--color-text-muted);
+}
+
+.slot-rail-item {
+	background: var(--color-surface);
+	border: var(--border-width) solid var(--color-border);
+	border-right: none;
+}
+
+.slot-rail-title {
+	padding: var(--space-xs) var(--space-md);
+	color: var(--color-accent);
+	background: var(--color-surface-secondary);
+	border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.slot-rail-item > .slot-content {
+	padding: var(--space-xs) var(--space-md);
+}

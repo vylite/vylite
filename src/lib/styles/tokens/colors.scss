@@ -1,0 +1,24 @@
+:root {
+	/* surfaces */
+	--color-background: #191724;
+	--color-surface: #1f1d2e;
+	--color-surface-secondary: #26233a;
+
+	/* text */
+	--color-text: #e0def4;
+	--color-text-muted: #908caa;
+	--color-text-on-accent: #191724;
+
+	/* accent */
+	--color-accent: #ebbcba;
+	--color-accent-text: var(--color-accent);
+	--color-selection: color-mix(in srgb, var(--color-accent) 22%, transparent);
+
+	/* status */
+	--color-success: #9ccfd8;
+	--color-warning: #f6c177;
+	--color-error: #eb6f92;
+
+	/* structure */
+	--color-border: #524f67;
+}
