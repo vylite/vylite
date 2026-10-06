@@ -1,7 +1,7 @@
 import { catchError } from '$lib/core/errors/catch-error';
 import type { ErrorReporter } from '$lib/core/errors/reporter';
 import { VyliteError } from '$lib/core/errors/vylite-error';
-import type { Space } from '$lib/core/space/space';
+import type { Space } from '$lib/core/spaces/space';
 import type { Plugin } from './plugin';
 import { PluginManifestSchema } from './types';
 

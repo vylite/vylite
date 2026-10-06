@@ -14,14 +14,14 @@
 	<div class="app-workspace">
 		<div class="app-hub">
 			<div class="slot slot-root">
-				{#each root.getAll() as content (content)}
-					<Slot {content} hidden={content !== root.getTop()} />
+				{#each root.getAll() as view (view)}
+					<Slot content={view.content} hidden={view !== root.getTop()} />
 				{/each}
 			</div>
 
 			<div class="slot slot-twig">
-				{#each twig.getAll() as content (content)}
-					<Slot {content} hidden={content !== twig.getTop()} />
+				{#each twig.getAll() as view (view)}
+					<Slot content={view.content} hidden={view !== twig.getTop()} />
 				{/each}
 			</div>
 		</div>
@@ -29,7 +29,7 @@
 		<div class="slot slot-nest">
 			<svelte:boundary onerror={(error) => app.errors.report(error)}>
 				{#each pages.getAll() as openPage (openPage)}
-					<Slot content={openPage.page.nest} hidden={openPage !== pages.getActive()} />
+					<Slot content={openPage.page.nest.content} hidden={openPage !== pages.getActive()} />
 				{/each}
 
 				{#snippet failed(_error, reset)}
@@ -49,6 +49,6 @@
 	</div>
 
 	<div class="slot-overlay">
-		<Slot content={overlay.get()} />
+		<Slot content={overlay.get()?.content ?? null} />
 	</div>
 </div>

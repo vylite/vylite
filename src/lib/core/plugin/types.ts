@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { App } from '$lib/core/app';
-import type { Space } from '$lib/core/space/space';
+import type { Space } from '$lib/core/spaces/space';
 import type { Plugin } from './plugin';
 
 const idPart = z.string().regex(/^[a-z0-9-]+$/, 'use lowercase letters, digits and hyphens');

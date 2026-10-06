@@ -1,0 +1,35 @@
+.about {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-content: start;
+	height: 100%;
+	background: var(--color-surface-secondary);
+}
+
+.about-row {
+	display: grid;
+	grid-template-columns: subgrid;
+	grid-column: 1 / -1;
+	gap: var(--space-lg);
+	align-items: baseline;
+	padding: var(--space-sm) var(--space-lg);
+}
+
+.about-name {
+	color: var(--color-accent-text);
+}
+
+.about-version {
+	color: var(--color-text-muted);
+}
+
+.about-link {
+	justify-self: start;
+	padding: 0;
+	font: inherit;
+	color: var(--color-accent-text);
+	text-decoration: underline;
+	cursor: pointer;
+	background: none;
+	border: none;
+}

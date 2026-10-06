@@ -1,0 +1,13 @@
+.suggestions-popup {
+	position: absolute;
+	top: calc(var(--hub-bottom) + var(--space-sm));
+	min-width: 12rem;
+	background: var(--color-surface-secondary);
+	border: var(--border-width) solid var(--color-border);
+	border-radius: var(--border-radius);
+
+	&[data-side='above'] {
+		top: auto;
+		bottom: calc(100% - var(--hub-top) + var(--space-sm));
+	}
+}

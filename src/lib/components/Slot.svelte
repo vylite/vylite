@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { SlotContent } from '$lib/core/ui/types';
+	import type { SlotContent } from '$lib/core/ui/shared/types';
 	import './Slot.scss';
 
 	let {

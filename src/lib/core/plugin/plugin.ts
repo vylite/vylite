@@ -1,5 +1,5 @@
 import type { App } from '$lib/core/app';
-import type { Space } from '$lib/core/space/space';
+import type { Space } from '$lib/core/spaces/space';
 import { Lifecycle } from './lifecycle.svelte';
 import type { PluginManifest } from './types';
 

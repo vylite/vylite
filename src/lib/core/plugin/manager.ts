@@ -2,7 +2,7 @@ import { SvelteMap } from 'svelte/reactivity';
 import type { App } from '$lib/core/app';
 import { catchError } from '$lib/core/errors/catch-error';
 import { VyliteError } from '$lib/core/errors/vylite-error';
-import type { Space } from '$lib/core/space/space';
+import type { Space } from '$lib/core/spaces/space';
 import { APP_PLUGINS, SPACE_PLUGINS } from '$lib/core-plugins/registry';
 import { loadPlugin, unloadPlugin } from './load-plugin';
 import type { Plugin } from './plugin';

@@ -1,4 +1,4 @@
-import type { Page } from '$lib/core/ui/types';
+import type { Page } from '$lib/core/ui/shared/types';
 
 export type CommandParam = {
 	placeholder: string;

@@ -11,7 +11,7 @@ export function init(app: App): () => void {
 	const stopRejections = on(window, 'unhandledrejection', (event) =>
 		app.errors.report(event.reason)
 	);
-	const stopKeys = app.ui.keys.listen();
+	const stopKeys = app.keys.listen();
 
 	void start(app);
 
@@ -32,7 +32,7 @@ async function start(app: App): Promise<void> {
 	});
 
 	if (error) app.errors.report(error);
-	if (!app.spaces.switcher.getActive()) await app.plugins.loadAppPlugins(null);
+	if (!app.spaces.getActive()) await app.plugins.loadAppPlugins(null);
 
 	initState.ready = true;
 }

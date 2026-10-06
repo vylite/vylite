@@ -1,0 +1,12 @@
+.hive-scene {
+	display: flex;
+	align-items: center;
+	height: calc(3 * (var(--line-height) * 1em + 2 * var(--space-xs)));
+	margin: 0 var(--space-md);
+	overflow: hidden;
+}
+
+.hive-canvas {
+	display: block;
+	image-rendering: pixelated;
+}

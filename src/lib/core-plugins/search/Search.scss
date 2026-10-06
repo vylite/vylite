@@ -1,0 +1,25 @@
+.search > .list .list-row {
+	padding: var(--space-xs) var(--space-md);
+}
+
+.search-line {
+	flex: 1;
+	min-width: 0;
+	overflow: hidden;
+	color: var(--color-text-muted);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.search-match {
+	color: var(--color-accent-text);
+	background: none;
+}
+
+.list-row[aria-selected='true'] :is(.search-line, .search-match) {
+	color: inherit;
+}
+
+.list-row[aria-selected='true'] .search-match {
+	text-decoration: underline;
+}

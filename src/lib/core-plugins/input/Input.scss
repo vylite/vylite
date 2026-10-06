@@ -1,0 +1,87 @@
+.input {
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+.input-label {
+	display: flex;
+	flex: none;
+	align-items: center;
+	align-self: stretch;
+	max-width: 50%;
+	padding: 0 var(--space-md);
+	overflow: hidden;
+	color: var(--color-accent-text);
+	background: var(--color-surface-secondary);
+}
+
+.input-label-text {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.input-field {
+	position: relative;
+	flex: 1;
+	min-width: 0;
+	height: 100%;
+}
+
+.input-text,
+.input-ghost {
+	position: absolute;
+	inset: 0;
+	padding: var(--space-md);
+	overflow: hidden;
+	font: inherit;
+	line-height: var(--line-height);
+	letter-spacing: inherit;
+	white-space: pre;
+}
+
+.input-text {
+	width: 100%;
+	color: var(--color-text);
+	caret-color: var(--color-text);
+	background: transparent;
+	border: none;
+	outline: none;
+
+	&::placeholder {
+		color: var(--color-text-muted);
+	}
+}
+
+.input-ghost {
+	display: flex;
+	align-items: center;
+	color: var(--color-text-muted);
+	pointer-events: none;
+}
+
+.input-ghost-typed {
+	color: transparent;
+}
+
+.input-message {
+	max-width: 50%;
+	padding-right: var(--space-md);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	&[data-kind='error'] {
+		color: var(--color-error);
+	}
+
+	&[data-kind='notice'] {
+		color: var(--color-success);
+	}
+}
+
+.input[data-message-code='COMMAND_NOT_FOUND'] .input-text {
+	color: var(--color-error);
+}

@@ -1,0 +1,32 @@
+.suggestions {
+	display: grid;
+	grid-template-columns: auto 1fr;
+}
+
+.suggestions-row {
+	display: grid;
+	grid-template-columns: subgrid;
+	grid-column: 1 / -1;
+	gap: var(--space-lg);
+	padding: var(--space-xs) var(--space-md);
+
+	&[aria-selected='true'] {
+		color: var(--color-text-on-accent);
+		background: var(--color-accent);
+	}
+}
+
+.suggestions-trigger {
+	color: var(--color-accent-text);
+}
+
+.suggestions-description {
+	overflow: hidden;
+	color: var(--color-text-muted);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.suggestions-row[aria-selected='true'] > * {
+	color: inherit;
+}
