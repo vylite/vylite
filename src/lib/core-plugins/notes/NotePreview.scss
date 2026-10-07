@@ -1,0 +1,18 @@
+.note-preview {
+	flex: 1;
+	min-width: 0;
+	background: var(--color-surface);
+}
+
+.note-preview-body {
+	height: 100%;
+}
+
+.note-preview-empty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	padding: var(--space-sm) var(--space-lg);
+	color: var(--color-text-muted);
+}

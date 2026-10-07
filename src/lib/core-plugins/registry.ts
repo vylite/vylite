@@ -2,8 +2,10 @@ import type { PluginModule } from '$lib/core/plugin/types';
 import type { Space } from '$lib/core/spaces/space';
 import * as about from './about';
 import * as community from './community';
+import * as editor from './editor';
 import * as help from './help';
 import * as input from './input';
+import * as notes from './notes';
 import * as search from './search';
 import * as spaces from './spaces';
 import * as suggestions from './suggestions';
@@ -19,4 +21,4 @@ export const APP_PLUGINS: PluginModule<Space | null>[] = [
 	help,
 	community
 ];
-export const SPACE_PLUGINS: PluginModule[] = [search, twigHive];
+export const SPACE_PLUGINS: PluginModule[] = [search, notes, editor, twigHive];
