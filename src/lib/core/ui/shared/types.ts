@@ -1,12 +1,12 @@
 import type { Command } from '$lib/core/commands/types';
 
-export type SlotContent = {
+export type Mountable = {
 	mount: (el: HTMLElement) => void;
 	unmount?: () => void;
 };
 
 export type View = {
-	content: SlotContent;
+	content: Mountable;
 	onKeydown?: (event: KeyboardEvent) => void;
 };
 
@@ -26,11 +26,17 @@ export type OpenPage = {
 	page: Page;
 };
 
-export type RailWindow = {
+export type RailWindow = View & {
 	title: string;
-	content: SlotContent;
+	focused?: false;
+	onKeydown?: never;
 };
 
-export type RailEntry = RailWindow & {
+export type FocusedRailWindow = View & {
+	title: string;
+	focused: true;
+};
+
+export type RailEntry = (RailWindow | FocusedRailWindow) & {
 	openPage: OpenPage | null;
 };

@@ -14,10 +14,18 @@
 	--color-accent-text: var(--color-accent);
 	--color-selection: color-mix(in srgb, var(--color-accent) 22%, transparent);
 
+	/* hues */
+	--color-red: #eb6f92;
+	--color-green: #31748f;
+	--color-yellow: #f6c177;
+	--color-blue: #9ccfd8;
+	--color-magenta: #c4a7e7;
+	--color-cyan: #ebbcba;
+
 	/* status */
-	--color-success: #9ccfd8;
-	--color-warning: #f6c177;
-	--color-error: #eb6f92;
+	--color-success: var(--color-green);
+	--color-warning: var(--color-yellow);
+	--color-error: var(--color-red);
 
 	/* structure */
 	--color-border: #524f67;

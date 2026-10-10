@@ -1,8 +1,8 @@
 :root {
 	--notes-tree-width: 16rem;
 	--notes-indent: 1.25rem;
-	--notes-folder-closed: var(--color-success);
-	--notes-folder-open: var(--color-error);
+	--notes-folder-closed: var(--color-green);
+	--notes-folder-open: var(--color-red);
 }
 
 .notes {

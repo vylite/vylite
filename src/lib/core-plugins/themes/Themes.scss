@@ -1,0 +1,11 @@
+.themes {
+	color: var(--color-text);
+
+	.list {
+		background: none;
+	}
+
+	.list-row {
+		padding: var(--space-xs) var(--space-md);
+	}
+}

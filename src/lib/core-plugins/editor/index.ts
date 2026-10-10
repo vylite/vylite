@@ -8,6 +8,8 @@ import { createNote, UNTITLED } from './shared/note-files';
 
 export const manifest: PluginManifest = { name: 'editor', author: 'vylite' };
 
+const KEYS_WITHOUT_REFOCUS = ['/', 'Escape', 'Shift', 'Control', 'Alt', 'AltGraph', 'Meta'];
+
 export default class EditorPlugin extends Plugin {
 	onload(): void {
 		const { commands } = this.app;
@@ -49,7 +51,7 @@ export default class EditorPlugin extends Plugin {
 			nest: {
 				content: { mount: (el) => editor.mount(el), unmount: () => editor.close() },
 				onKeydown: (event) => {
-					if (event.key !== '/') editor.focus();
+					if (!KEYS_WITHOUT_REFOCUS.includes(event.key)) editor.focus();
 				}
 			}
 		};

@@ -1,23 +1,33 @@
 .slot-rail {
 	position: absolute;
+	top: calc(var(--titlebar-height) + var(--space-md));
 	right: 0;
 	bottom: var(--space-md);
 	z-index: 10;
 	display: flex;
 	flex-direction: column;
+	justify-content: flex-end;
 	gap: var(--space-xs);
+	pointer-events: none;
 	width: max(12rem, calc((100% - var(--content-width)) / 2 - var(--space-md)));
 	font-size: var(--font-size-sm);
 	color: var(--color-text-muted);
 }
 
 .slot-rail-item {
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+	pointer-events: auto;
+	overflow: hidden;
 	background: var(--color-surface);
 	border: var(--border-width) solid var(--color-border);
 	border-right: none;
+	border-radius: var(--border-radius) 0 0 var(--border-radius);
 }
 
 .slot-rail-title {
+	flex: none;
 	padding: var(--space-xs) var(--space-md);
 	color: var(--color-accent);
 	background: var(--color-surface-secondary);
@@ -25,5 +35,7 @@
 }
 
 .slot-rail-item > .slot-content {
-	padding: var(--space-xs) var(--space-md);
+	height: auto;
+	min-height: 0;
+	overflow-y: auto;
 }

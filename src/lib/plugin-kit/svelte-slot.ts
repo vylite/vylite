@@ -1,10 +1,10 @@
 import { mount, unmount, type Component } from 'svelte';
-import type { SlotContent } from '$lib/core/ui/shared/types';
+import type { Mountable } from '$lib/core/ui/shared/types';
 
 export function svelteSlot<Props extends Record<string, unknown>>(
 	component: Component<Props>,
 	props?: Props
-): SlotContent {
+): Mountable {
 	let instance: Record<string, unknown> | undefined;
 
 	return {

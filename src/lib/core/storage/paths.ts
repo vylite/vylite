@@ -11,3 +11,7 @@ export async function getSpacesFile(): Promise<string> {
 export async function getSettingsFile(): Promise<string> {
 	return join(await getAppFolder(), 'settings.json');
 }
+
+export async function getAppearanceFile(): Promise<string> {
+	return join(await getAppFolder(), 'appearance.json');
+}

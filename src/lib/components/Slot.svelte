@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { SlotContent } from '$lib/core/ui/shared/types';
+	import type { Mountable } from '$lib/core/ui/shared/types';
 	import './Slot.scss';
 
 	let {
 		content,
 		slot,
 		hidden = false
-	}: { content: SlotContent | null; slot?: string; hidden?: boolean } = $props();
+	}: { content: Mountable | null; slot?: string; hidden?: boolean } = $props();
 
 	let el = $state<HTMLElement>();
 

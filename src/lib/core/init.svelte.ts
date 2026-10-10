@@ -25,6 +25,7 @@ export function init(app: App): () => void {
 async function start(app: App): Promise<void> {
 	const [error] = await catchError(async () => {
 		await app.settings.load();
+		await app.appearance.load();
 		await app.spaces.registry.load();
 
 		const [latest] = app.spaces.registry.getAll();

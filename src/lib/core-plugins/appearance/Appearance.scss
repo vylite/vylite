@@ -1,0 +1,22 @@
+.appearance {
+	color: var(--color-text);
+
+	.list {
+		background: none;
+	}
+
+	.list-row {
+		padding: var(--space-xs) var(--space-md);
+	}
+}
+
+.appearance-text {
+	width: 100%;
+	padding: var(--space-xs) var(--space-md);
+	font: inherit;
+	color: var(--color-text);
+	background: var(--color-surface-secondary);
+	border: none;
+	border-top: var(--border-width) solid var(--color-border);
+	outline: none;
+}

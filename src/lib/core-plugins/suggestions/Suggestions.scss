@@ -1,6 +1,9 @@
 .suggestions {
 	display: grid;
-	grid-template-columns: auto 1fr;
+	grid-template-columns: auto minmax(0, 1fr);
+	align-content: start;
+	max-height: calc(3 * (var(--line-height) * 1em + 2 * var(--space-xs)));
+	overflow-y: auto;
 }
 
 .suggestions-row {

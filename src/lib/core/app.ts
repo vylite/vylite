@@ -1,3 +1,4 @@
+import { AppAppearance } from './appearance/appearance.svelte';
 import { CommandRegistry } from './commands/registry';
 import { ErrorReporter } from './errors/reporter';
 import { InputController } from './input';
@@ -10,6 +11,7 @@ import { UiManager } from './ui';
 export class App {
 	readonly errors = new ErrorReporter();
 	readonly settings = new AppSettings(this);
+	readonly appearance = new AppAppearance(this);
 	readonly ui = new UiManager();
 	readonly spaces = new Spaces(this);
 	readonly commands = new CommandRegistry(this);

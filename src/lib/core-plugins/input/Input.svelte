@@ -21,7 +21,7 @@
 			type="text"
 			autocomplete="off"
 			spellcheck="false"
-			placeholder={app.ui.pages.isHome() ? 'type here...' : ''}
+			placeholder={app.ui.pages.isHome() ? app.appearance.get().placeholder : ''}
 			value={view.value}
 			{@attach app.input.element.attach}
 		/>

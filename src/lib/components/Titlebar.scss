@@ -13,7 +13,7 @@
 	right: 0;
 	z-index: 101;
 	display: flex;
-	height: 32px;
+	height: var(--titlebar-height);
 	-webkit-user-select: none;
 	user-select: none;
 }
@@ -38,6 +38,6 @@
 
 	&.titlebar-close {
 		color: var(--color-surface);
-		background: var(--color-error);
+		background: var(--color-red);
 	}
 }

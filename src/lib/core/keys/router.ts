@@ -12,9 +12,22 @@ export class KeyRouter {
 	private _onKeydown(event: KeyboardEvent): void {
 		if (isTextField(event.target)) return;
 
-		const { overlay, pages, root } = this._app.ui;
+		const { overlay, pages, rail, root } = this._app.ui;
 		const isPlainEscape =
 			event.key === 'Escape' && !event.ctrlKey && !event.metaKey && !event.altKey;
+
+		const focused = rail.getFocused();
+
+		if (focused) {
+			if (isPlainEscape) {
+				event.preventDefault();
+				rail.closeFocused();
+			} else {
+				focused.onKeydown?.(event);
+			}
+
+			return;
+		}
 
 		if (isPlainEscape && overlay.get()) {
 			event.preventDefault();

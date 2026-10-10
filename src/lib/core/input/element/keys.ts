@@ -82,9 +82,17 @@ export class InputKeys {
 	}
 
 	onUnhandledKeydown(event: KeyboardEvent): void {
-		if (event.ctrlKey || event.metaKey || event.altKey || event.key.length !== 1) return;
+		if (event.ctrlKey || event.metaKey || event.altKey) return;
 
 		const { element, dispatcher, messages } = this._input;
+
+		if (event.key === 'Escape' && messages.get()) {
+			event.preventDefault();
+			messages.clear();
+			return;
+		}
+
+		if (event.key.length !== 1) return;
 
 		messages.clear();
 
