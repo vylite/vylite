@@ -1,3 +1,4 @@
+import type { CommandTree } from '$lib/core/commands/types';
 import { catchError } from '$lib/core/errors/catch-error';
 import { Plugin } from '$lib/core/plugin/plugin';
 import type { PluginManifest } from '$lib/core/plugin/types';
@@ -15,16 +16,17 @@ export default class ThemesPlugin extends Plugin<Space | null> {
 	onload(): void {
 		const saved = getTheme(this.app.appearance.get().theme);
 		if (saved) applyTheme(saved);
+	}
 
-		this.addCleanup(
-			this.app.commands.register({
-				trigger: 'themes',
+	getCommands(): CommandTree {
+		return {
+			themes: {
 				description: 'change theme',
 				run: () => {
 					this._openPicker();
 				}
-			})
-		);
+			}
+		};
 	}
 
 	private _openPicker(): void {

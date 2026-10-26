@@ -2,7 +2,7 @@
 	import type { App } from '$lib/core/app';
 	import './Welcome.scss';
 
-	const TRIGGERS = ['start', 'pick'];
+	const COMMAND_IDS = ['vylite.spaces.start', 'vylite.spaces.pick'];
 
 	let { app }: { app: App } = $props();
 </script>
@@ -12,8 +12,8 @@
 	<p class="welcome-subtitle">choose a location for your notes</p>
 
 	<div class="welcome-options">
-		{#each TRIGGERS as trigger (trigger)}
-			{@const command = app.commands.get(trigger)}
+		{#each COMMAND_IDS as id (id)}
+			{@const command = app.commands.get(id)}
 			{#if command}
 				<div class="welcome-option">
 					<span class="welcome-trigger">/{command.trigger}</span>

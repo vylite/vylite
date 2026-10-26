@@ -51,7 +51,7 @@ export class PluginManager {
 					context: { id: plugin.id }
 				});
 
-			await loadPlugin(plugin, this._app.errors);
+			await loadPlugin(plugin, this._app);
 			this._plugins.set(plugin.id, plugin);
 		});
 

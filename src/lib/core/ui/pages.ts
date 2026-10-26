@@ -1,7 +1,6 @@
-import { VyliteError } from '$lib/core/errors/vylite-error';
 import type { UiManager } from '.';
 import { reactiveList } from './shared/reactive-list.svelte';
-import type { OpenPage, Page } from './shared/types';
+import type { OpenPage } from './shared/types';
 
 export class UiPages {
 	private readonly _pages = reactiveList<OpenPage>();
@@ -9,7 +8,6 @@ export class UiPages {
 	constructor(private readonly _ui: UiManager) {}
 
 	open(openPage: OpenPage): void {
-		assertUniqueTriggers(openPage.page);
 		this._pages.add(openPage);
 	}
 
@@ -34,14 +32,4 @@ export class UiPages {
 	isHome(): boolean {
 		return this._pages.getAll().length === 0;
 	}
-}
-
-function assertUniqueTriggers(page: Page): void {
-	const triggers = (page.commands ?? []).map((command) => command.trigger);
-	const duplicate = triggers.find((trigger, i) => triggers.indexOf(trigger) !== i);
-
-	if (duplicate)
-		throw new VyliteError('duplicate page command trigger.', 'PAGE_COMMAND_TRIGGER_CONFLICT', {
-			context: { trigger: duplicate, page: page.label }
-		});
 }

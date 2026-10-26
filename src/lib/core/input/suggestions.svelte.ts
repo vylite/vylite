@@ -1,16 +1,16 @@
-import type { Command } from '$lib/core/commands/types';
+import type { RegisteredCommand } from '$lib/core/commands/types';
 import { getSuggestions } from './shared/matches';
 import type { InputController } from '.';
 
 export class InputSuggestions {
 	private _selectedIndex = $state(0);
-	private readonly _all: Command[];
+	private readonly _all: RegisteredCommand[];
 
 	constructor(private readonly _input: InputController) {
 		this._all = $derived(getSuggestions(_input.element.getValue(), _input.dispatcher.getAll()));
 	}
 
-	getAll(): Command[] {
+	getAll(): RegisteredCommand[] {
 		return this._all;
 	}
 
@@ -21,7 +21,7 @@ export class InputSuggestions {
 		return Math.min(this._selectedIndex, count - 1);
 	}
 
-	getSelected(): Command | undefined {
+	getSelected(): RegisteredCommand | undefined {
 		return this.getAll()[this.getSelectedIndex()];
 	}
 

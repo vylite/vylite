@@ -1,4 +1,16 @@
-import type { Page } from '$lib/core/ui/shared/types';
+import type { Page, PageState } from '$lib/core/ui/shared/types';
+
+export type CommandDefinition = {
+	description: string;
+	params?: CommandParam[];
+
+	rank?: number;
+	internal?: boolean;
+
+	isAvailable?(state: PageState | undefined): true | string;
+	run(args: string[], state: PageState | undefined): Page | void | Promise<Page | void>;
+	children?: CommandTree;
+};
 
 export type CommandParam = {
 	placeholder: string;
@@ -6,13 +18,11 @@ export type CommandParam = {
 	required?: boolean;
 };
 
-export type Command = {
+export type CommandTree = Record<string, CommandDefinition>;
+
+export type RegisteredCommand = Omit<CommandDefinition, 'children'> & {
+	id: string;
 	trigger: string;
-	description: string;
-	params?: CommandParam[];
-
-	rank?: number;
-	internal?: boolean;
-
-	run: (args: string[]) => Page | undefined | Promise<Page | undefined>;
+	pluginId: string;
+	parentId: string | null;
 };

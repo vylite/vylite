@@ -1,15 +1,15 @@
-import type { Command, CommandParam } from '$lib/core/commands/types';
+import type { CommandParam, RegisteredCommand } from '$lib/core/commands/types';
 import { getTypedTrigger, getWords } from './parse';
 
 export function getGhost(
 	value: string,
-	suggestion: Command | undefined,
-	command: Command | undefined
+	suggestion: RegisteredCommand | undefined,
+	command: RegisteredCommand | undefined
 ): string {
 	return getTriggerTail(value, suggestion) || getArgHint(value, command?.params ?? []);
 }
 
-export function getTriggerTail(value: string, suggestion: Command | undefined): string {
+export function getTriggerTail(value: string, suggestion: RegisteredCommand | undefined): string {
 	const typed = getTypedTrigger(value);
 	if (!suggestion || typed === null) return '';
 

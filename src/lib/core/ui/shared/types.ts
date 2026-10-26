@@ -1,4 +1,4 @@
-import type { Command } from '$lib/core/commands/types';
+import type { RegisteredCommand } from '$lib/core/commands/types';
 
 export type Mountable = {
 	mount: (el: HTMLElement) => void;
@@ -12,16 +12,19 @@ export type View = {
 
 export type Layout = 'normal' | 'tall' | 'full';
 
+export type PageState = Record<string, unknown>;
+
 export type Page = {
 	label?: string;
 	layout?: Layout;
 
 	nest: View;
-	commands?: Command[];
+	state?: PageState;
+	getSelection?: () => string | null;
 };
 
 export type OpenPage = {
-	command: Command;
+	command: RegisteredCommand;
 	args: string[];
 	page: Page;
 };

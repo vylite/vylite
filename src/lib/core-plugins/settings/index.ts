@@ -1,3 +1,4 @@
+import type { CommandTree } from '$lib/core/commands/types';
 import { catchError } from '$lib/core/errors/catch-error';
 import { Plugin } from '$lib/core/plugin/plugin';
 import type { PluginManifest } from '$lib/core/plugin/types';
@@ -11,14 +12,13 @@ import { TOGGLES, type Toggle } from './toggles';
 export const manifest: PluginManifest = { name: 'settings', author: 'vylite' };
 
 export default class SettingsPlugin extends Plugin<Space | null> {
-	onload(): void {
-		this.addCleanup(
-			this.app.commands.register({
-				trigger: 'settings',
+	getCommands(): CommandTree {
+		return {
+			settings: {
 				description: 'app options',
 				run: () => this._getPage()
-			})
-		);
+			}
+		};
 	}
 
 	private _getPage(): Page {
@@ -32,7 +32,8 @@ export default class SettingsPlugin extends Plugin<Space | null> {
 			nest: {
 				content: svelteSlot(Settings, { app: this.app, list }),
 				onKeydown: (event) => list.onKeydown(event)
-			}
+			},
+			state: { list }
 		};
 	}
 

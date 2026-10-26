@@ -1,7 +1,7 @@
 import { VyliteError } from '$lib/core/errors/vylite-error';
-import type { Command } from './types';
+import type { RegisteredCommand } from './types';
 
-export function assertValidArgs(command: Command, args: string[]): void {
+export function assertValidArgs(command: RegisteredCommand, args: string[]): void {
 	const params = command.params ?? [];
 	const filled = args.filter((arg) => arg.length > 0);
 
@@ -18,7 +18,7 @@ export function assertValidArgs(command: Command, args: string[]): void {
 		});
 }
 
-function getArgCountMessage(command: Command): string {
+function getArgCountMessage(command: RegisteredCommand): string {
 	const count = command.params?.length ?? 0;
 
 	if (count === 0) return `/${command.trigger} takes no arguments.`;

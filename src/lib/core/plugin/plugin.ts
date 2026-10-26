@@ -1,4 +1,5 @@
 import type { App } from '$lib/core/app';
+import type { CommandTree } from '$lib/core/commands/types';
 import type { Space } from '$lib/core/spaces/space';
 import { Lifecycle } from './lifecycle.svelte';
 import type { PluginManifest } from './types';
@@ -15,5 +16,7 @@ export abstract class Plugin<S extends Space | null = Space> extends Lifecycle {
 		this.id = `${manifest.author}.${manifest.name}`;
 	}
 
-	abstract onload(): void | Promise<void>;
+	getCommands(): CommandTree {
+		return {};
+	}
 }

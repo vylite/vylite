@@ -1,3 +1,4 @@
+import type { CommandTree } from '$lib/core/commands/types';
 import { Plugin } from '$lib/core/plugin/plugin';
 import type { PluginManifest } from '$lib/core/plugin/types';
 import type { Space } from '$lib/core/spaces/space';
@@ -15,16 +16,17 @@ export default class AppearancePlugin extends Plugin<Space | null> {
 			(appearance) => applySizes(appearance)
 		);
 		this.addCleanup(removeSizes);
+	}
 
-		this.addCleanup(
-			this.app.commands.register({
-				trigger: 'appearance',
+	getCommands(): CommandTree {
+		return {
+			appearance: {
 				description: 'sizes and spacing',
 				run: () => {
 					this._openPanel();
 				}
-			})
-		);
+			}
+		};
 	}
 
 	private _openPanel(): void {

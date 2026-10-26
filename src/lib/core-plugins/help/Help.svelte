@@ -8,7 +8,12 @@
 	const commands = $derived(
 		app.commands
 			.getAll()
-			.filter((command) => !command.internal)
+			.filter(
+				(command) =>
+					!command.internal &&
+					command.parentId === null &&
+					app.commands.getUnavailableReason(command) === undefined
+			)
 			.sort((first, second) => first.trigger.localeCompare(second.trigger))
 	);
 
@@ -16,7 +21,7 @@
 </script>
 
 <div class="help" tabindex="-1" {@attach focus}>
-	{#each commands as command (command.trigger)}
+	{#each commands as command (command.id)}
 		<div class="help-row">
 			<span class="help-trigger">/{command.trigger}</span>
 			<span class="help-description">{command.description}</span>

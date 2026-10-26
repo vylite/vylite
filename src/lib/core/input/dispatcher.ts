@@ -1,5 +1,5 @@
 import type { App } from '$lib/core/app';
-import type { Command } from '$lib/core/commands/types';
+import type { RegisteredCommand } from '$lib/core/commands/types';
 import { catchError } from '$lib/core/errors/catch-error';
 import { getCommandLine } from './shared/parse';
 import type { InputController } from '.';
@@ -10,15 +10,22 @@ export class InputDispatcher {
 		private readonly _input: InputController
 	) {}
 
-	getAll(): Command[] {
-		return this._app.commands.getAvailable().filter((command) => !command.internal);
+	getAll(): RegisteredCommand[] {
+		return this._app.commands
+			.getAvailable()
+			.filter(
+				(command) =>
+					!command.internal && this._app.commands.getUnavailableReason(command) === undefined
+			);
 	}
 
-	getLineCommand(): Command | undefined {
+	getLineCommand(): RegisteredCommand | undefined {
 		const line = getCommandLine(this._input.element.getValue());
 		if (!line) return undefined;
 
-		return this.getAll().find((command) => command.trigger === line.trigger);
+		return this._app.commands
+			.getAvailable()
+			.find((command) => !command.internal && command.trigger === line.trigger);
 	}
 
 	openCommandLine(): void {

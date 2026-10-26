@@ -1,4 +1,5 @@
 import { sep } from '@tauri-apps/api/path';
+import type { CommandTree } from '$lib/core/commands/types';
 import { Plugin } from '$lib/core/plugin/plugin';
 import type { PluginManifest } from '$lib/core/plugin/types';
 import type { Page } from '$lib/core/ui/shared/types';
@@ -11,27 +12,20 @@ export const manifest: PluginManifest = { name: 'editor', author: 'vylite' };
 const KEYS_WITHOUT_REFOCUS = ['/', 'Escape', 'Shift', 'Control', 'Alt', 'AltGraph', 'Meta'];
 
 export default class EditorPlugin extends Plugin {
-	onload(): void {
-		const { commands } = this.app;
-
-		this.addCleanup(
-			commands.register({
-				trigger: 'editor',
+	getCommands(): CommandTree {
+		return {
+			editor: {
 				description: 'open a note',
 				internal: true,
 				params: [{ placeholder: 'path', required: true }],
 				run: ([path]) => this._getPage(path, false)
-			})
-		);
-
-		this.addCleanup(
-			commands.register({
-				trigger: 'new',
+			},
+			new: {
 				description: 'create a note',
 				params: [{ placeholder: 'title' }],
 				run: ([title]) => this._getNewPage(title)
-			})
-		);
+			}
+		};
 	}
 
 	private async _getNewPage(title: string | undefined): Promise<Page> {
@@ -53,7 +47,8 @@ export default class EditorPlugin extends Plugin {
 				onKeydown: (event) => {
 					if (!KEYS_WITHOUT_REFOCUS.includes(event.key)) editor.focus();
 				}
-			}
+			},
+			state: { editor }
 		};
 	}
 }

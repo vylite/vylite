@@ -1,3 +1,4 @@
+import type { CommandTree } from '$lib/core/commands/types';
 import { Plugin } from '$lib/core/plugin/plugin';
 import type { PluginManifest } from '$lib/core/plugin/types';
 import type { Page } from '$lib/core/ui/shared/types';
@@ -8,14 +9,13 @@ import { NotesTree } from './tree.svelte';
 export const manifest: PluginManifest = { name: 'notes', author: 'vylite' };
 
 export default class NotesPlugin extends Plugin {
-	onload(): void {
-		this.addCleanup(
-			this.app.commands.register({
-				trigger: 'list',
+	getCommands(): CommandTree {
+		return {
+			list: {
 				description: 'browse notes',
 				run: () => this._getPage()
-			})
-		);
+			}
+		};
 	}
 
 	private _getPage(): Page {
@@ -26,7 +26,9 @@ export default class NotesPlugin extends Plugin {
 			nest: {
 				content: svelteSlot(Notes, { tree }),
 				onKeydown: (event) => tree.onKeydown(event)
-			}
+			},
+			state: { tree },
+			getSelection: () => tree.list.getSelected()?.path ?? null
 		};
 	}
 }

@@ -1,14 +1,11 @@
+import type { App } from '$lib/core/app';
 import { catchError } from '$lib/core/errors/catch-error';
-import type { ErrorReporter } from '$lib/core/errors/reporter';
 import { VyliteError } from '$lib/core/errors/vylite-error';
 import type { Space } from '$lib/core/spaces/space';
 import type { Plugin } from './plugin';
 import { PluginManifestSchema } from './types';
 
-export async function loadPlugin(
-	plugin: Plugin<Space | null>,
-	errors: ErrorReporter
-): Promise<void> {
+export async function loadPlugin(plugin: Plugin<Space | null>, app: App): Promise<void> {
 	const manifest = PluginManifestSchema.safeParse(plugin.manifest);
 	if (!manifest.success)
 		throw new VyliteError('invalid plugin manifest.', 'PLUGIN_MANIFEST_INVALID', {
@@ -16,11 +13,14 @@ export async function loadPlugin(
 			context: { manifest: plugin.manifest }
 		});
 
-	const [error] = await catchError(() => plugin.load());
+	const [error] = await catchError(async () => {
+		await plugin.load();
+		plugin.addCleanup(app.commands.register(plugin.id, plugin.getCommands()));
+	});
 	if (!error) return;
 
 	const [unloadError] = await catchError(() => unloadPlugin(plugin));
-	if (unloadError) errors.report(unloadError);
+	if (unloadError) app.errors.report(unloadError);
 
 	throw new VyliteError('failed to load plugin.', 'PLUGIN_LOAD_FAILED', {
 		cause: error,

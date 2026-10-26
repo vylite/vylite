@@ -1,4 +1,5 @@
 import { getCurrentWindow } from '@tauri-apps/api/window';
+import type { CommandTree } from '$lib/core/commands/types';
 import { Plugin } from '$lib/core/plugin/plugin';
 import type { PluginManifest } from '$lib/core/plugin/types';
 import type { Space } from '$lib/core/spaces/space';
@@ -8,25 +9,18 @@ import About from './About.svelte';
 export const manifest: PluginManifest = { name: 'about', author: 'vylite' };
 
 export default class AboutPlugin extends Plugin<Space | null> {
-	onload(): void {
-		const { commands } = this.app;
-
-		this.addCleanup(
-			commands.register({
-				trigger: 'about',
+	getCommands(): CommandTree {
+		return {
+			about: {
 				description: 'app info',
 				run: () => ({ label: 'about', nest: { content: svelteSlot(About, { app: this.app }) } })
-			})
-		);
-
-		this.addCleanup(
-			commands.register({
-				trigger: 'quit',
+			},
+			quit: {
 				description: 'close vylite',
 				run: async () => {
 					await getCurrentWindow().close();
 				}
-			})
-		);
+			}
+		};
 	}
 }
