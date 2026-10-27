@@ -21,7 +21,7 @@ export class NoteSaver {
 		this.saveLater.flush();
 		if (!this._isNamedOnClose) return;
 
-		if (body.trim() === '') this._queue(() => this._fs.remove(this._path));
+		if (/^[\s#]*$/.test(body)) this._queue(() => this._fs.remove(this._path));
 		else this._queue(() => renameToFirstLine(this._fs, this._path, body));
 	}
 

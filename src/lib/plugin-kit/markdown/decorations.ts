@@ -61,7 +61,10 @@ function getDecorations(view: EditorView): DecorationSet {
 				const isCursorOnIt = selection.ranges.some(
 					(range) => range.from <= marked.to && range.to >= marked.from
 				);
-				if (view.hasFocus && isCursorOnIt) return;
+				const isEmptyHeading =
+					node.name === 'HeaderMark' &&
+					doc.sliceString(marked.from, marked.to).replace(/#/g, '').trim() === '';
+				if (isEmptyHeading || (view.hasFocus && isCursorOnIt)) return;
 
 				const isBeforeSpace = doc.sliceString(node.to, node.to + 1) === ' ';
 				const end = node.name === 'HeaderMark' && isBeforeSpace ? node.to + 1 : node.to;

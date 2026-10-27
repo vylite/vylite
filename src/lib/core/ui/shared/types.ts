@@ -1,3 +1,4 @@
+import type { ScreenLayout } from '$lib/core/appearance/schema';
 import type { RegisteredCommand } from '$lib/core/commands/types';
 
 export type Mountable = {
@@ -8,15 +9,14 @@ export type Mountable = {
 export type View = {
 	content: Mountable;
 	onKeydown?: (event: KeyboardEvent) => void;
+	isHidden?: () => boolean;
 };
-
-export type Layout = 'normal' | 'tall' | 'full';
 
 export type PageState = Record<string, unknown>;
 
 export type Page = {
 	label?: string;
-	layout?: Layout;
+	layout?: Partial<ScreenLayout>;
 
 	nest: View;
 	state?: PageState;
@@ -27,19 +27,4 @@ export type OpenPage = {
 	command: RegisteredCommand;
 	args: string[];
 	page: Page;
-};
-
-export type RailWindow = View & {
-	title: string;
-	focused?: false;
-	onKeydown?: never;
-};
-
-export type FocusedRailWindow = View & {
-	title: string;
-	focused: true;
-};
-
-export type RailEntry = (RailWindow | FocusedRailWindow) & {
-	openPage: OpenPage | null;
 };

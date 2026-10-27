@@ -85,6 +85,13 @@ export class InputKeys {
 		if (event.ctrlKey || event.metaKey || event.altKey) return;
 
 		const { element, dispatcher, messages } = this._input;
+		const hasText = element.getValue() !== '';
+
+		if (hasText) {
+			element.focus();
+			this.onKeydown(event);
+			if (event.defaultPrevented) return;
+		}
 
 		if (event.key === 'Escape' && messages.get()) {
 			event.preventDefault();
@@ -94,15 +101,15 @@ export class InputKeys {
 
 		if (event.key.length !== 1) return;
 
-		messages.clear();
-
-		if (event.key === '/') {
+		if (event.key === '/' && !hasText) {
 			event.preventDefault();
 			dispatcher.openCommandLine();
 			return;
 		}
 
-		if (!this._app.ui.pages.isHome()) return;
+		messages.clear();
+
+		if (!this._app.ui.pages.isHome() && !hasText) return;
 
 		event.preventDefault();
 		element.setValue(element.getValue() + event.key);

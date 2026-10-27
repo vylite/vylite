@@ -8,13 +8,12 @@
 </script>
 
 <div class="input" data-message-code={view.message?.code}>
-	{#if view.label}
-		<span class="input-label"><span class="input-label-text">{view.label}</span></span>
-	{/if}
-
 	<div class="input-field">
 		<div class="input-ghost" aria-hidden="true">
-			<span class="input-ghost-typed">{view.value}</span>{view.ghost}
+			{#if view.value.startsWith('/')}<span class="input-ghost-mark">/</span>{/if}<span
+				class="input-ghost-typed"
+				>{view.value.startsWith('/') ? view.value.slice(1) : view.value}</span
+			><span class="input-ghost-text">{view.ghost}</span>
 		</div>
 		<input
 			class="input-text"
@@ -25,9 +24,11 @@
 			value={view.value}
 			{@attach app.input.element.attach}
 		/>
-	</div>
 
-	{#if view.message && view.message.code !== 'COMMAND_NOT_FOUND'}
-		<span class="input-message" data-kind={view.message.kind}>{view.message.text}</span>
-	{/if}
+		{#if view.message && view.message.code !== 'COMMAND_NOT_FOUND'}
+			<div class="input-message" data-kind={view.message.kind}>
+				<span class="input-message-text">{view.message.text}</span>
+			</div>
+		{/if}
+	</div>
 </div>

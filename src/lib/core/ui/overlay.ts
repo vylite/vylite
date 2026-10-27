@@ -8,11 +8,11 @@ export class UiOverlay {
 		return this._views.add(view);
 	}
 
-	get(): View | null {
-		return this._views.getAll().at(-1) ?? null;
+	getAll(): readonly View[] {
+		return this._views.getAll();
 	}
 
-	close(): void {
-		this._views.removeLast();
+	getVisible(): readonly View[] {
+		return this._views.getAll().filter((view) => !view.isHidden?.());
 	}
 }

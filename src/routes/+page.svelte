@@ -3,20 +3,30 @@
 	import RenderFailed from '$lib/components/RenderFailed.svelte';
 	import Slot from '$lib/components/Slot.svelte';
 
-	const { root, twig, overlay, pages, rail } = app.ui;
+	const { root, twig, overlay, pages } = app.ui;
+	const crumbs = $derived(
+		pages
+			.getAll()
+			.filter((openPage) => openPage.page.label)
+			.slice(-2)
+	);
 </script>
 
-<div
-	class="app"
-	data-layout={pages.getActive()?.page.layout ?? 'normal'}
-	data-home={pages.isHome()}
->
+<div class="app" data-home={pages.isHome()}>
 	<div class="app-workspace">
 		<div class="app-hub">
-			<div class="slot slot-root">
-				{#each root.getAll() as view (view)}
-					<Slot content={view.content} hidden={view !== root.getTop()} />
+			<div class="app-slit">
+				{#each crumbs as openPage (openPage)}
+					<div class="app-crumb" data-last={openPage === crumbs.at(-1)}>
+						<span class="app-crumb-text">{openPage.page.label}</span>
+					</div>
 				{/each}
+
+				<div class="slot slot-root">
+					{#each root.getAll() as view (view)}
+						<Slot content={view.content} hidden={view !== root.getTop()} />
+					{/each}
+				</div>
 			</div>
 
 			<div class="slot slot-twig">
@@ -39,16 +49,9 @@
 		</div>
 	</div>
 
-	<div class="slot-rail">
-		{#each rail.getVisible() as item (item)}
-			<div class="slot-rail-item">
-				<div class="slot-rail-title">{item.title}</div>
-				<Slot content={item.content} />
-			</div>
-		{/each}
-	</div>
-
 	<div class="slot-overlay">
-		<Slot content={overlay.get()?.content ?? null} />
+		{#each overlay.getAll() as view (view)}
+			<Slot content={view.content} hidden={!overlay.getVisible().includes(view)} />
+		{/each}
 	</div>
 </div>

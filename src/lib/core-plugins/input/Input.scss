@@ -4,25 +4,6 @@
 	height: 100%;
 }
 
-.input-label {
-	display: flex;
-	flex: none;
-	align-items: center;
-	align-self: stretch;
-	max-width: 50%;
-	padding: 0 var(--space-md);
-	overflow: hidden;
-	color: var(--color-accent-text);
-	background: var(--color-surface-secondary);
-}
-
-.input-label-text {
-	min-width: 0;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
 .input-field {
 	position: relative;
 	flex: 1;
@@ -34,7 +15,7 @@
 .input-ghost {
 	position: absolute;
 	inset: 0;
-	padding: var(--space-md);
+	padding: var(--space-md) var(--side-padding);
 	overflow: hidden;
 	font: inherit;
 	line-height: var(--line-height);
@@ -44,34 +25,40 @@
 
 .input-text {
 	width: 100%;
-	color: var(--color-text);
+	color: transparent;
 	caret-color: var(--color-text);
 	background: transparent;
 	border: none;
 	outline: none;
 
 	&::placeholder {
-		color: var(--color-text-muted);
+		color: var(--color-text);
+		opacity: 0.55;
 	}
 }
 
 .input-ghost {
 	display: flex;
 	align-items: center;
-	color: var(--color-text-muted);
+	color: var(--color-text);
 	pointer-events: none;
 }
 
-.input-ghost-typed {
-	color: transparent;
+.input-ghost-mark {
+	color: var(--color-accent);
+}
+
+.input-ghost-text {
+	opacity: 0.4;
 }
 
 .input-message {
-	max-width: 50%;
-	padding-right: var(--space-md);
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	padding: 0 var(--side-padding);
+	pointer-events: none;
 
 	&[data-kind='error'] {
 		color: var(--color-error);
@@ -82,6 +69,27 @@
 	}
 }
 
-.input[data-message-code='COMMAND_NOT_FOUND'] .input-text {
+.input-message-text {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.input-field:has(> .input-message) {
+	> .input-ghost {
+		visibility: hidden;
+	}
+
+	> .input-text {
+		caret-color: transparent;
+
+		&::placeholder {
+			color: transparent;
+		}
+	}
+}
+
+.input[data-message-code='COMMAND_NOT_FOUND'] .input-ghost-typed {
 	color: var(--color-error);
 }

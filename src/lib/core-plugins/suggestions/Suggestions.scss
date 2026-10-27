@@ -2,7 +2,7 @@
 	display: grid;
 	grid-template-columns: auto minmax(0, 1fr);
 	align-content: start;
-	max-height: calc(3 * (var(--line-height) * 1em + 2 * var(--space-xs)));
+	max-height: calc(3 * (var(--line-height) * 1em + 2 * var(--row-padding)));
 	overflow-y: auto;
 }
 
@@ -11,7 +11,7 @@
 	grid-template-columns: subgrid;
 	grid-column: 1 / -1;
 	gap: var(--space-lg);
-	padding: var(--space-xs) var(--space-md);
+	padding: var(--row-padding) var(--side-padding);
 
 	&[aria-selected='true'] {
 		color: var(--color-text-on-accent);
@@ -20,7 +20,13 @@
 }
 
 .suggestions-trigger {
-	color: var(--color-accent-text);
+	min-width: calc(var(--suggestions-trigger-length) * 1ch);
+	color: var(--color-text);
+}
+
+.suggestions-mark {
+	color: var(--color-text-muted);
+	opacity: 0.4;
 }
 
 .suggestions-description {
@@ -32,4 +38,9 @@
 
 .suggestions-row[aria-selected='true'] > * {
 	color: inherit;
+}
+
+.suggestions-row[aria-selected='true'] :is(.suggestions-mark, .suggestions-description) {
+	color: inherit;
+	opacity: 0.75;
 }

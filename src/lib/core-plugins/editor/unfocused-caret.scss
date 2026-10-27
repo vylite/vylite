@@ -1,0 +1,7 @@
+.unfocused-caret-layer {
+	pointer-events: none;
+}
+
+.unfocused-caret {
+	border-left: 1px solid var(--color-text-muted);
+}

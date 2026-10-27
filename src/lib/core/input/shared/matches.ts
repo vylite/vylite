@@ -9,8 +9,8 @@ export function getSuggestions(value: string, commands: RegisteredCommand[]): Re
 }
 
 function compareCommands(first: RegisteredCommand, second: RegisteredCommand): number {
-	const firstRank = first.rank ?? Number.MAX_SAFE_INTEGER;
-	const secondRank = second.rank ?? Number.MAX_SAFE_INTEGER;
+	const firstPriority = first.priority ?? 0;
+	const secondPriority = second.priority ?? 0;
 
-	return firstRank - secondRank || first.trigger.localeCompare(second.trigger);
+	return secondPriority - firstPriority || first.trigger.localeCompare(second.trigger);
 }

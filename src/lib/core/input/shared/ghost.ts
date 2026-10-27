@@ -6,7 +6,12 @@ export function getGhost(
 	suggestion: RegisteredCommand | undefined,
 	command: RegisteredCommand | undefined
 ): string {
-	return getTriggerTail(value, suggestion) || getArgHint(value, command?.params ?? []);
+	const tail = getTriggerTail(value, suggestion);
+	if (suggestion && tail) {
+		return tail + getArgHint(`/${suggestion.trigger}`, suggestion.params ?? []);
+	}
+
+	return getArgHint(value, command?.params ?? []);
 }
 
 export function getTriggerTail(value: string, suggestion: RegisteredCommand | undefined): string {

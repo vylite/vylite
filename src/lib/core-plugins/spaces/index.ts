@@ -23,6 +23,7 @@ export default class SpacesPlugin extends Plugin<Space | null> {
 		return {
 			spaces: {
 				description: 'switch space',
+				priority: 10,
 				run: () => this._getPage(),
 				children: {
 					pick: {
@@ -45,11 +46,13 @@ export default class SpacesPlugin extends Plugin<Space | null> {
 			},
 			start: {
 				description: 'make a space in Documents/vylite',
+				priority: 15,
 				isAvailable: () => this.space === null || 'a space is already open.',
 				run: () => this._start()
 			},
 			pick: {
 				description: 'add a folder',
+				priority: 14,
 				isAvailable: () => this.space === null || 'a space is already open.',
 				run: () => this._pick()
 			}

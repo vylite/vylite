@@ -76,10 +76,12 @@ export class JsonFile<T> {
 	}
 
 	private async _reload(): Promise<void> {
-		await this._writing;
+		const writing = this._writing;
+		await writing;
 
 		try {
-			this._data = await this._read();
+			const data = await this._read();
+			if (this._writing === writing) this._data = data;
 		} catch (error) {
 			this._errors.report(error);
 		}

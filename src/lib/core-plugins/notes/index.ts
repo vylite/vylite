@@ -13,6 +13,7 @@ export default class NotesPlugin extends Plugin {
 		return {
 			list: {
 				description: 'browse notes',
+				priority: 15,
 				run: () => this._getPage()
 			}
 		};
@@ -23,6 +24,7 @@ export default class NotesPlugin extends Plugin {
 
 		return {
 			label: 'notes',
+			layout: { width: 1120, height: { padding: 64 } },
 			nest: {
 				content: svelteSlot(Notes, { tree }),
 				onKeydown: (event) => tree.onKeydown(event)

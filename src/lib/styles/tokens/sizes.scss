@@ -17,18 +17,28 @@
 	--space-md: 0.95rem;
 	--space-lg: 1.5rem;
 	--space-xl: 2rem;
+	--row-padding: 6px;
+	--side-padding: var(--space-md);
 
 	/* gaps */
-	--inner-gap: 11px;
+	--inner-gap: 6px;
+	--edge-gap: 6px;
 
 	/* borders */
 	--border-width: 1px;
 	--border-radius: 0px;
 
-	/* widths */
-	--content-width: 930px;
+	/* layout */
+	--layout-width: min(930px, 100%);
+	--layout-height: min(581px, 100%);
+	--layout-padding-top: 6px;
+	--layout-padding-right: 6px;
+	--layout-padding-bottom: 6px;
+	--layout-padding-left: 6px;
+	--layout-anchor-x: center;
+	--layout-anchor-y: center;
 
 	/* heights */
-	--root-height: 52px;
+	--root-height: 44px;
 	--titlebar-height: 32px;
 }

@@ -12,7 +12,7 @@
 	gap: var(--space-lg);
 	align-items: baseline;
 	width: 100%;
-	padding: var(--space-sm) var(--space-lg);
+	padding: var(--row-padding) var(--side-padding);
 	font: inherit;
 	color: inherit;
 	text-align: left;
@@ -45,10 +45,11 @@
 }
 
 .list-row[aria-selected='true'] .list-row-note {
-	color: var(--color-text-on-accent);
+	color: inherit;
+	opacity: 0.75;
 }
 
 .list-empty {
-	padding: var(--space-sm) var(--space-lg);
+	padding: var(--row-padding) var(--side-padding);
 	color: var(--color-text-muted);
 }

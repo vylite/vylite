@@ -12,28 +12,9 @@ export class KeyRouter {
 	private _onKeydown(event: KeyboardEvent): void {
 		if (isTextField(event.target)) return;
 
-		const { overlay, pages, rail, root } = this._app.ui;
+		const { pages, root } = this._app.ui;
 		const isPlainEscape =
 			event.key === 'Escape' && !event.ctrlKey && !event.metaKey && !event.altKey;
-
-		const focused = rail.getFocused();
-
-		if (focused) {
-			if (isPlainEscape) {
-				event.preventDefault();
-				rail.closeFocused();
-			} else {
-				focused.onKeydown?.(event);
-			}
-
-			return;
-		}
-
-		if (isPlainEscape && overlay.get()) {
-			event.preventDefault();
-			overlay.close();
-			return;
-		}
 
 		this.passToViews(event);
 		if (event.defaultPrevented) return;
@@ -50,7 +31,9 @@ export class KeyRouter {
 	passToViews(event: KeyboardEvent): void {
 		const { overlay, pages, twig } = this._app.ui;
 
-		for (const view of [overlay.get(), pages.getActive()?.page.nest, twig.getTop()]) {
+		const layers = overlay.getVisible().toReversed();
+
+		for (const view of [...layers, pages.getActive()?.page.nest, twig.getTop()]) {
 			view?.onKeydown?.(event);
 			if (event.defaultPrevented) return;
 		}

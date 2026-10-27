@@ -9,7 +9,7 @@ export class UiRoot {
 	}
 
 	getTop(): View | null {
-		return this._views.getAll().at(-1) ?? null;
+		return this._views.getAll().findLast((view) => !view.isHidden?.()) ?? null;
 	}
 
 	getAll(): readonly View[] {

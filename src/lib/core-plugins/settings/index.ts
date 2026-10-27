@@ -16,6 +16,7 @@ export default class SettingsPlugin extends Plugin<Space | null> {
 		return {
 			settings: {
 				description: 'app options',
+				priority: 11,
 				run: () => this._getPage()
 			}
 		};

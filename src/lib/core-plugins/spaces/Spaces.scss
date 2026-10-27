@@ -10,7 +10,7 @@
 	flex: none;
 	grid-template-columns: auto 1fr;
 	gap: var(--space-sm) var(--space-md);
-	padding: var(--space-lg);
+	padding: var(--space-lg) var(--side-padding);
 	border-bottom: var(--border-width) solid var(--color-border);
 }
 

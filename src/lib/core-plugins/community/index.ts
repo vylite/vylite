@@ -12,6 +12,7 @@ export default class CommunityPlugin extends Plugin<Space | null> {
 		return {
 			community: {
 				description: 'community links',
+				priority: 10,
 				run: () => ({
 					label: 'community',
 					nest: { content: svelteSlot(Community, { app: this.app }) }

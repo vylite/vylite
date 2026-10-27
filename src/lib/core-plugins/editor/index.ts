@@ -22,6 +22,7 @@ export default class EditorPlugin extends Plugin {
 			},
 			new: {
 				description: 'create a note',
+				priority: 14,
 				params: [{ placeholder: 'title' }],
 				run: ([title]) => this._getNewPage(title)
 			}
@@ -41,7 +42,7 @@ export default class EditorPlugin extends Plugin {
 
 		return {
 			label: path.slice(path.lastIndexOf(sep()) + 1, -'.md'.length),
-			layout: 'tall',
+			layout: { height: { padding: 0 } },
 			nest: {
 				content: { mount: (el) => editor.mount(el), unmount: () => editor.close() },
 				onKeydown: (event) => {

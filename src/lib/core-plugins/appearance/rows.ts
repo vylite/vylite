@@ -2,9 +2,10 @@ import type { Appearance } from '$lib/core/appearance/schema';
 
 export type SizeRow = {
 	kind: 'size';
-	key: 'borderWidth' | 'borderRadius' | 'innerGap';
+	key: 'borderWidth' | 'borderRadius' | 'innerGap' | 'edgeGap' | 'rowPadding';
 	label: string;
 	variable: string;
+	min: number;
 	max: number;
 };
 
@@ -17,15 +18,46 @@ export type TextRow = {
 export type Row = SizeRow | TextRow;
 
 const SIZE_ROWS: readonly SizeRow[] = [
-	{ kind: 'size', key: 'borderWidth', label: 'border width', variable: '--border-width', max: 4 },
+	{
+		kind: 'size',
+		key: 'borderWidth',
+		label: 'border width',
+		variable: '--border-width',
+		min: 0,
+		max: 4
+	},
 	{
 		kind: 'size',
 		key: 'borderRadius',
-		label: 'corner radius',
+		label: 'border radius',
 		variable: '--border-radius',
+		min: 0,
 		max: 24
 	},
-	{ kind: 'size', key: 'innerGap', label: 'interior gap', variable: '--inner-gap', max: 32 }
+	{
+		kind: 'size',
+		key: 'innerGap',
+		label: 'interior gap',
+		variable: '--inner-gap',
+		min: 0,
+		max: 32
+	},
+	{
+		kind: 'size',
+		key: 'edgeGap',
+		label: 'edge gap',
+		variable: '--edge-gap',
+		min: 0,
+		max: 48
+	},
+	{
+		kind: 'size',
+		key: 'rowPadding',
+		label: 'row padding',
+		variable: '--row-padding',
+		min: 0,
+		max: 16
+	}
 ];
 
 export const ROWS: readonly Row[] = [

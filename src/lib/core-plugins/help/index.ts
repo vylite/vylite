@@ -12,6 +12,7 @@ export default class HelpPlugin extends Plugin<Space | null> {
 		return {
 			help: {
 				description: 'all commands',
+				priority: 13,
 				run: () => ({ label: 'help', nest: { content: svelteSlot(Help, { app: this.app }) } })
 			}
 		};

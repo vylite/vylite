@@ -1,38 +1,53 @@
 .app {
-	--workspace-top: 16.5vh;
-	--workspace-bottom: clamp(var(--space-xs), calc(20vh - 120px), 5vh);
-
 	position: relative;
 	display: flex;
+	justify-content: var(--layout-anchor-x);
+	align-items: var(--layout-anchor-y);
 	width: 100%;
 	height: 100%;
-}
-
-.app[data-layout='tall'] {
-	--workspace-top: 0;
-	--workspace-bottom: 0;
-}
-
-.app[data-layout='full'] {
-	--content-width: min(90vw, 1100px);
-	--workspace-top: 2vh;
-	--workspace-bottom: 0;
+	padding: var(--layout-padding-top) var(--layout-padding-right) var(--layout-padding-bottom)
+		var(--layout-padding-left);
 }
 
 .app-workspace {
 	display: flex;
-	flex: 1;
+	flex: none;
 	flex-direction: column;
-	align-items: center;
 	gap: var(--inner-gap);
-	min-width: 0;
-	height: 100%;
-	padding-top: var(--workspace-top);
-	padding-bottom: var(--workspace-bottom);
+	width: var(--layout-width);
+	height: var(--layout-height);
 }
 
-.app-hub {
-	width: min(var(--content-width), 100%);
+.app-slit {
+	display: flex;
+	gap: var(--inner-gap);
+}
+
+.app-crumb {
+	display: flex;
+	flex: none;
+	align-items: center;
+	height: var(--root-height);
+	padding: 0 var(--side-padding);
+	color: var(--color-text-muted);
+	background: var(--color-surface-secondary);
+	border: var(--border-width) solid var(--color-border);
+	border-radius: var(--border-radius);
+
+	&[data-last='true'] {
+		color: var(--color-accent);
+	}
+}
+
+.app-workspace:has(> .slot-nest :is(input, textarea, [contenteditable='true']):focus) .app-crumb {
+	color: var(--color-text-muted);
+}
+
+.app-crumb-text {
+	max-width: 10ch;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .slot {
@@ -49,6 +64,8 @@
 }
 
 .slot-root {
+	flex: 1;
+	min-width: 0;
 	height: var(--root-height);
 }
 
@@ -59,19 +76,14 @@
 	border-top-right-radius: 0;
 }
 
-.app-hub:has(> .slot-twig > :not([hidden]) > *) > .slot-root {
+.app-hub:has(> .slot-twig > :not([hidden]) > *) > .app-slit > .slot-root {
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
 }
 
 .slot-nest {
 	flex: 1;
-	width: min(var(--content-width), 100%);
 	min-height: 0;
-}
-
-.app[data-layout='tall'] .slot-nest {
-	border-bottom: none;
 }
 
 .slot-overlay {

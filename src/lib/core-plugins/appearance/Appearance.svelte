@@ -47,5 +47,9 @@
 			onblur={() => panel.finishEditing()}
 			{@attach focus}
 		/>
+	{:else}
+		<div class="appearance-hint">
+			<kbd class="appearance-hint-key">r</kbd> to reset a value
+		</div>
 	{/if}
 </div>

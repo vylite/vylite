@@ -23,7 +23,7 @@
 <div class="help" tabindex="-1" {@attach focus}>
 	{#each commands as command (command.id)}
 		<div class="help-row">
-			<span class="help-trigger">/{command.trigger}</span>
+			<span class="help-trigger"><span class="help-mark">/</span>{command.trigger}</span>
 			<span class="help-description">{command.description}</span>
 		</div>
 	{/each}

@@ -10,24 +10,12 @@ export default class WelcomePlugin extends Plugin<Space | null> {
 	onload(): void {
 		if (this.space) return;
 
-		const { pages, twig } = this.app.ui;
 		const { element } = this.app.input;
 
-		let remove: (() => void) | undefined;
-
-		this.addCleanup(() => remove?.());
-		this.watch(
-			() => pages.isHome() && element.getValue().trim() === '',
-			(isIdle) => {
-				if (isIdle === (remove !== undefined)) return;
-
-				remove?.();
-				remove = undefined;
-				if (!isIdle) return;
-
-				const welcome = { content: svelteSlot(Welcome, { app: this.app }) };
-				remove = twig.set(welcome);
-			}
-		);
+		const welcome = {
+			content: svelteSlot(Welcome, { app: this.app }),
+			isHidden: () => element.getValue().trim() !== ''
+		};
+		this.addCleanup(this.app.ui.twig.set(welcome));
 	}
 }

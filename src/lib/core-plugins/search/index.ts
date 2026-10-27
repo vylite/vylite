@@ -8,11 +8,7 @@ export const manifest: PluginManifest = { name: 'search', author: 'vylite' };
 
 export default class SearchPlugin extends Plugin {
 	onload(): void {
-		const { pages, twig } = this.app.ui;
 		const { element } = this.app.input;
-		let remove: (() => void) | undefined;
-
-		this.addCleanup(() => remove?.());
 
 		const search = new HomeSearch(this.app, this.space);
 		this.watch(
@@ -20,22 +16,11 @@ export default class SearchPlugin extends Plugin {
 			() => search.list.select(0)
 		);
 
-		this.watch(
-			() =>
-				pages.isHome() && element.getValue().trim() !== '' && !element.getValue().startsWith('/'),
-			(isShown) => {
-				if (isShown === (remove !== undefined)) return;
-
-				remove?.();
-				remove = undefined;
-				if (!isShown) return;
-
-				const view = {
-					content: svelteSlot(Search, { app: this.app, search }),
-					onKeydown: (event: KeyboardEvent) => search.list.onKeydown(event)
-				};
-				remove = twig.set(view);
-			}
-		);
+		const view = {
+			content: svelteSlot(Search, { app: this.app, search }),
+			onKeydown: (event: KeyboardEvent) => search.list.onKeydown(event),
+			isHidden: () => element.getValue().trim() === '' || element.getValue().startsWith('/')
+		};
+		this.addCleanup(this.app.ui.twig.set(view));
 	}
 }

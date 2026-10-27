@@ -12,8 +12,10 @@
 
 	const appWindow = getCurrentWindow();
 	let maximized = $state(false);
+	let isDecorated = $state<boolean | null>(null);
 
 	onMount(() => {
+		void appWindow.isDecorated().then((value) => (isDecorated = value));
 		void appWindow.isMaximized().then((value) => (maximized = value));
 		const stopListening = appWindow.onResized(async () => {
 			maximized = await appWindow.isMaximized();
@@ -25,31 +27,33 @@
 
 <div class="titlebar-drag" data-tauri-drag-region></div>
 
-<div class="titlebar-controls">
-	<button
-		class="titlebar-control"
-		onclick={() => appWindow.minimize()}
-		aria-label="minimize"
-		title="minimize"
-	>
-		{ICON.minimize}
-	</button>
+{#if isDecorated === false}
+	<div class="titlebar-controls">
+		<button
+			class="titlebar-control"
+			onclick={() => appWindow.minimize()}
+			aria-label="minimize"
+			title="minimize"
+		>
+			{ICON.minimize}
+		</button>
 
-	<button
-		class="titlebar-control"
-		onclick={() => appWindow.toggleMaximize()}
-		aria-label={maximized ? 'restore' : 'maximize'}
-		title={maximized ? 'restore' : 'maximize'}
-	>
-		{maximized ? ICON.restore : ICON.maximize}
-	</button>
+		<button
+			class="titlebar-control"
+			onclick={() => appWindow.toggleMaximize()}
+			aria-label={maximized ? 'restore' : 'maximize'}
+			title={maximized ? 'restore' : 'maximize'}
+		>
+			{maximized ? ICON.restore : ICON.maximize}
+		</button>
 
-	<button
-		class="titlebar-control titlebar-close"
-		onclick={() => appWindow.close()}
-		aria-label="close"
-		title="close"
-	>
-		{ICON.close}
-	</button>
-</div>
+		<button
+			class="titlebar-control titlebar-close"
+			onclick={() => appWindow.close()}
+			aria-label="close"
+			title="close"
+		>
+			{ICON.close}
+		</button>
+	</div>
+{/if}

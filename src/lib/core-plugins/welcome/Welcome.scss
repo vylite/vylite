@@ -9,7 +9,7 @@
 .welcome-subtitle,
 .welcome-keys {
 	margin: 0;
-	padding: 0 var(--space-md);
+	padding: 0 var(--side-padding);
 }
 
 .welcome-title {
@@ -34,7 +34,7 @@
 	grid-template-columns: subgrid;
 	grid-column: 1 / -1;
 	gap: var(--space-lg);
-	padding: var(--space-xs) var(--space-md);
+	padding: var(--row-padding) var(--side-padding);
 }
 
 .welcome-trigger {

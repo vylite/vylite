@@ -2,6 +2,7 @@
 	--markdown-heading: var(--color-accent-text);
 	--markdown-link: var(--color-blue);
 	--markdown-code: var(--color-yellow);
+	--markdown-code-background: color-mix(in srgb, var(--color-surface-secondary) 70%, transparent);
 
 	--markdown-h1-size: 1.802em;
 	--markdown-h2-size: 1.602em;
@@ -36,6 +37,15 @@
 	.cm-placeholder {
 		color: var(--color-text-muted);
 	}
+
+	.cm-cursor {
+		border-left-color: var(--color-text);
+	}
+
+	.cm-selectionBackground,
+	&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground {
+		background: var(--color-selection);
+	}
 }
 
 .markdown-heading {
@@ -68,11 +78,11 @@
 
 .markdown-code {
 	color: var(--markdown-code);
-	background: var(--color-surface-secondary);
+	background: var(--markdown-code-background);
 }
 
 .markdown-code-line {
-	background: var(--color-surface-secondary);
+	background: var(--markdown-code-background);
 }
 
 .markdown-quote,

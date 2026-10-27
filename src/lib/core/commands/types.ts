@@ -4,7 +4,7 @@ export type CommandDefinition = {
 	description: string;
 	params?: CommandParam[];
 
-	rank?: number;
+	priority?: number;
 	internal?: boolean;
 
 	isAvailable?(state: PageState | undefined): true | string;

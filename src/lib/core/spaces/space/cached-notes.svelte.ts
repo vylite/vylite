@@ -53,7 +53,8 @@ export class CachedNotes {
 		}
 
 		if (info.isDirectory) {
-			const entries = await this._fs.list(path);
+			const [, entries] = await catchError(() => this._fs.list(path));
+			if (!entries) return;
 
 			await Promise.all(
 				entries.map((entry) => this._sync(path ? path + sep() + entry.name : entry.name))

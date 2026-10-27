@@ -39,7 +39,7 @@ export class AppearancePanel {
 				const step = direction * (event.shiftKey ? BIG_STEP : 1);
 				const value = this._app.appearance.get()[row.key] + step;
 
-				void this._set(row.key, Math.min(row.max, Math.max(0, value)));
+				void this._set(row.key, Math.min(row.max, Math.max(row.min, value)));
 				return;
 			}
 

@@ -14,11 +14,16 @@
 	grid-template-columns: subgrid;
 	grid-column: 1 / -1;
 	gap: var(--space-lg);
-	padding: var(--space-sm) var(--space-lg);
+	padding: var(--row-padding) var(--side-padding);
 }
 
 .help-trigger {
-	color: var(--color-accent-text);
+	color: var(--color-text);
+}
+
+.help-mark {
+	color: var(--color-text-muted);
+	opacity: 0.4;
 }
 
 .help-description {

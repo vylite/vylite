@@ -13,10 +13,12 @@ export default class AboutPlugin extends Plugin<Space | null> {
 		return {
 			about: {
 				description: 'app info',
+				priority: 11,
 				run: () => ({ label: 'about', nest: { content: svelteSlot(About, { app: this.app }) } })
 			},
 			quit: {
 				description: 'close vylite',
+				priority: 10,
 				run: async () => {
 					await getCurrentWindow().close();
 				}

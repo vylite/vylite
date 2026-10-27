@@ -17,6 +17,6 @@ export class InputController {
 		this.messages = new InputMessages();
 		this.suggestions = new InputSuggestions(this);
 		this.dispatcher = new InputDispatcher(app, this);
-		this.view = new InputViewBuilder(app, this);
+		this.view = new InputViewBuilder(this);
 	}
 }

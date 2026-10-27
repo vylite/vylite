@@ -1,8 +1,6 @@
 :root {
-	--notes-tree-width: 16rem;
-	--notes-indent: 1.25rem;
-	--notes-folder-closed: var(--color-green);
-	--notes-folder-open: var(--color-red);
+	--notes-tree-width: 18rem;
+	--notes-indent: 2ch;
 }
 
 .notes {
@@ -18,8 +16,7 @@
 	border-right: var(--border-width) solid var(--color-border);
 
 	.list-row {
-		gap: var(--space-sm);
-		padding: 0.5rem var(--space-lg) 0.5rem calc(var(--space-lg) - 1ch);
+		gap: 1ch;
 	}
 }
 
@@ -27,20 +24,10 @@
 	flex: none;
 	width: 1ch;
 	margin-left: calc(var(--depth) * var(--notes-indent));
-
-	&[data-kind='folder'] {
-		color: var(--notes-folder-closed);
-	}
-
-	&[data-open='true'] {
-		color: var(--notes-folder-open);
-	}
+	color: var(--color-text-muted);
 }
 
-.notes-name[data-kind='folder'] {
-	color: var(--color-accent-text);
-}
-
-.notes-tree .list-row[aria-selected='true'] :is(.notes-mark, .notes-name) {
-	color: var(--color-text-on-accent);
+.notes-tree .list-row[aria-selected='true'] .notes-mark {
+	color: inherit;
+	opacity: 0.75;
 }
